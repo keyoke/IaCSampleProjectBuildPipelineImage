@@ -11,6 +11,9 @@ c:\windows\temp\install-kubectl.ps1 -Downloadlocation "$($env:ProgramFiles)\kube
 $env:Path += ";$($env:ProgramFiles)\kubectl\" 
 
 # Install aks-engine
-Invoke-WebRequest -Uri "https://github.com/Azure/aks-engine/releases/download/v0.34.1/aks-engine-v0.34.1-windows-amd64.zip" -OutFile "c:\windows\temp\aks-engine-v0.34.1-windows-amd64.zip"
-Expand-Archive -LiteralPath "c:\windows\temp\aks-engine-v0.34.1-windows-amd64.zip" -DestinationPath "$($env:ProgramFiles)\aks-engine\" -Force
+$version = "v0.34.1"
+$archivename = "aks-engine-$version-windows-amd64"
+Invoke-WebRequest -Uri "https://github.com/Azure/aks-engine/releases/download/$version/$archivename.zip" -OutFile "c:\windows\temp\$archivename.zip"
+Expand-Archive -LiteralPath "c:\windows\temp\$archivename.zip" -DestinationPath "c:\windows\temp\" -Force
+Move-Item -Path "c:\windows\temp\$archivename" -Destination "$($env:ProgramFiles)\aks-engine" -Force
 $env:Path += ";$($env:ProgramFiles)\aks-engine\"
