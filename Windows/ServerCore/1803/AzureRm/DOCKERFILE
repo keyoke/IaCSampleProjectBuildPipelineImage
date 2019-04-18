@@ -1,3 +1,4 @@
 FROM gelabsregistry.azurecr.io/azure-sdk-powershell:azurerm-windowsservercore-1803
+COPY /Windows/ServerCore/1803/install-kubectl.ps1 /windows/temp/
 COPY /Windows/ServerCore/1803/install.ps1 /windows/temp/
 RUN powershell.exe -executionpolicy bypass c:\windows\temp\install.ps1
